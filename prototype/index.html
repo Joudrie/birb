@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Clickable prototype of a birdwatching scrapbook: a closed, regional, seasonal set of 24 Massachusetts birds.">
 <title>Birdwatch — interactive prototype</title>
 
 <style>
@@ -48,9 +55,14 @@ body{
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
 
+/* minmax(0,...) not 1fr: a bare 1fr track floors at the item's min-content, so
+   the phone's intrinsic width pushes the column past the viewport and the whole
+   body scrolls sideways. */
 .page{max-width:1120px;margin:0 auto;padding:40px 20px 80px;
-  display:grid;gap:38px;grid-template-columns:1fr}
-@media (min-width:980px){.page{grid-template-columns:340px 1fr;align-items:start}}
+  display:grid;gap:38px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:980px){
+  .page{grid-template-columns:minmax(0,340px) minmax(0,1fr);align-items:start}
+}
 
 /* ---------- explainer / controls ---------- */
 .side{display:flex;flex-direction:column;gap:26px}
@@ -89,9 +101,10 @@ h1 em{font-style:italic;color:var(--accent)}
 .chip-dot{width:9px;height:9px;border-radius:2px;flex:none}
 
 /* ---------- phone ---------- */
-.stage{display:flex;justify-content:center}
+.stage{display:flex;justify-content:center;min-width:0}
+.side{min-width:0}
 .phone{
-  width:100%;max-width:392px;height:788px;background:var(--ground);
+  width:100%;max-width:392px;min-width:0;height:788px;background:var(--ground);
   border:1px solid var(--firm);border-radius:34px;overflow:hidden;
   display:flex;flex-direction:column;position:relative;
   box-shadow:0 22px 60px rgba(0,0,0,.14),0 2px 8px rgba(0,0,0,.06);
@@ -309,7 +322,8 @@ h1 em{font-style:italic;color:var(--accent)}
   *{animation:none!important;transition:none!important}
 }
 </style>
-
+</head>
+<body>
 <div class="page">
 
   <div class="side">
@@ -740,3 +754,5 @@ function render(){
 
 render();
 </script>
+</body>
+</html>
