@@ -1,0 +1,41 @@
+{
+ "slug": "backyard-24",
+ "name": "Massachusetts Backyard 24",
+ "region": "us-ma",
+ "blurb": "Twenty-four birds you can find from a yard, a feeder, or a walk around the block.",
+
+ "_comment": "Editorial. Which birds belong in a 'backyard' set is a judgement about habitat and recognisability that no dataset makes for you, so this is a hand-written list of scientific names and build_deck.py attaches the numbers. Order here does not matter -- the builder ranks by reportingIndex and cuts by tierShape.",
+
+ "tierShape": {"common": 8, "uncommon": 8, "rare": 6, "super_rare": 2},
+
+ "_design": "The eight easiest are year-round residents gettable in January. The middle introduces winter visitors (Dark-eyed Junco, White-throated Sparrow) so the set teaches that some birds only exist here in the cold. The hard end is spring-and-summer only. A January player physically cannot finish this deck, and has a reason to still be playing in May.",
+
+ "_omissions": "Cooper's Hawk belongs in a backyard set and is deliberately absent: eBird moved it to genus Astur, GBIF's backbone marks Astur as DOUBTFUL, and the records drop out entirely. Left out rather than faked. See README.",
+
+ "species": [
+  "Cyanocitta cristata",
+  "Poecile atricapillus",
+  "Turdus migratorius",
+  "Cardinalis cardinalis",
+  "Melospiza melodia",
+  "Zenaida macroura",
+  "Spinus tristis",
+  "Baeolophus bicolor",
+  "Dryobates pubescens",
+  "Sitta carolinensis",
+  "Melanerpes carolinus",
+  "Dumetella carolinensis",
+  "Thryothorus ludovicianus",
+  "Haemorhous mexicanus",
+  "Colaptes auratus",
+  "Junco hyemalis",
+  "Zonotrichia albicollis",
+  "Mimus polyglottos",
+  "Icterus galbula",
+  "Sialia sialis",
+  "Bombycilla cedrorum",
+  "Archilochus colubris",
+  "Pheucticus ludovicianus",
+  "Piranga olivacea"
+ ]
+}

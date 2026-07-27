@@ -1,0 +1,16 @@
+{
+ "_comment": "GBIF vernacular names are global, not North American. Mostly it gets US names right -- of 38 spot-checked common Massachusetts species only Circus cyaneus was outright wrong. The rest are lumped slash-forms, and they cannot be resolved automatically: 'Great Blue/Cocoi Heron' needs the trailing noun, while 'Great Cormorant/European Shag' must keep its own. Same shape, opposite rule. So they are written out. Keyed by scientific name.",
+
+ "Circus cyaneus": "Northern Harrier",
+ "Larus smithsonianus": "Herring Gull",
+
+ "Ardea herodias": "Great Blue Heron",
+ "Butorides virescens": "Green Heron",
+ "Egretta garzetta": "Little Egret",
+ "Buteo lineatus": "Red-shouldered Hawk",
+ "Phalacrocorax carbo": "Great Cormorant",
+ "Anser caerulescens": "Snow Goose",
+ "Somateria spectabilis": "King Eider",
+ "Cygnus buccinator": "Trumpeter Swan",
+ "Oceanodroma leucorhoa": "Leach's Storm-Petrel"
+}
