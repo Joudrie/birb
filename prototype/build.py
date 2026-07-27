@@ -24,6 +24,44 @@ DATA_DIR = os.path.join(ROOT, "data")
 MARKER = "/*__DATA__*/"
 
 
+def wrap(fragment):
+    """Wrap the template fragment in a real HTML document.
+
+    template.html is a fragment -- a <title>, a <style> and then content. That
+    is what an embedding host wants, but a file served on its own needs the rest
+    of the document, and the two omissions bite hard:
+
+      no doctype   the browser falls into quirks mode
+      no viewport  a phone assumes a ~980px desktop viewport and shrinks the
+                   two-column layout to unreadable
+
+    The template has exactly one <style> block, so splitting on its close tag
+    puts the title and styles in the head and everything else in the body.
+    """
+    end = fragment.find("</style>")
+    if end == -1:
+        raise SystemExit("error: template.html has no <style> block to split on")
+    end += len("</style>")
+    head, body = fragment[:end].strip(), fragment[end:].strip()
+
+    return (
+        "<!DOCTYPE html>\n"
+        '<html lang="en">\n'
+        "<head>\n"
+        '<meta charset="utf-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        '<meta name="color-scheme" content="light dark">\n'
+        '<meta name="description" content="Clickable prototype of a birdwatching '
+        'scrapbook: a closed, regional, seasonal set of 24 Massachusetts birds.">\n'
+        f"{head}\n"
+        "</head>\n"
+        "<body>\n"
+        f"{body}\n"
+        "</body>\n"
+        "</html>\n"
+    )
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -78,7 +116,7 @@ def main():
         raise SystemExit(f"error: {MARKER} not found in template.html")
 
     blob = "const DB=" + json.dumps(payload, separators=(",", ":")) + ";"
-    out = template.replace(MARKER, blob)
+    out = wrap(template.replace(MARKER, blob))
 
     with open(args.out, "w", encoding="utf-8") as fh:
         fh.write(out)
