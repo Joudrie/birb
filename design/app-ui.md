@@ -340,11 +340,16 @@ Target is **three taps, no typing, no menus**, and it works with no signal.
    ├──────────────────────────────────────────┤
    │  What did you find?              ⌕       │
    │                                          │
-   │  HERE NOW, IN YOUR DECK                  │  ← ordered by data:
-   │  ◭  Gray Catbird                         │    seasonality × deck
-   │  ◭  Baltimore Oriole                     │    membership × not
-   │  ◭  Cedar Waxwing                        │    yet logged
-   │  ◭  Ruby-throated Hummingbird            │
+   │  MOST LIKELY RIGHT NOW                   │  ← ranked by data:
+   │  ◭  American Robin                       │    reportingIndex ×
+   │  ◭  Song Sparrow                         │    how present it is
+   │  ◭  Mourning Dove                        │    this month, over
+   │  ◭  Northern Cardinal                    │    deck members not
+   │  ◭  American Goldfinch                   │    yet logged
+   │  ◭  Gray Catbird                         │
+   │  ◭  Tufted Titmouse                      │    top 8 only
+   │  ◭  Downy Woodpecker                     │
+   │  More from your deck — 14           →    │  ← the tail, one tap
    │                                          │
    │  RECENT                                  │
    │  ✓  Blue Jay                             │
@@ -362,12 +367,25 @@ Target is **three taps, no typing, no menus**, and it works with no signal.
               card flips to your photo
 ```
 
-**Why this beats an ID button.** The shortlist is usually 4–10 birds long,
-because it's filtered by *what is actually in the region this month*, *what's in
-your deck*, and *what you haven't logged yet*. The right answer is on screen
-without scrolling most of the time. That's the same convenience an AI ID would
-buy, from honest data, with no chance of confidently naming the wrong bird — and
-without becoming the identification app we said we weren't building.
+**Why this beats an ID button.** The right answer is on screen without scrolling
+most of the time, because the list is *ranked* rather than merely filtered.
+That's the same convenience an AI ID would buy, from honest data, with no chance
+of confidently naming the wrong bird — and without becoming the identification
+app we said we weren't building.
+
+**Ranking, not filtering — a correction from the prototype.** The first version of
+this design filtered to "in the region this month, in your deck, not yet logged"
+and assumed that left 4–10 birds. Building it proved otherwise: for a *new* player
+in June, 22 of the 24 cards qualify, and a 22-row sheet is not a quick-log. The
+filter only gets short once you have nearly finished the deck — exactly when you
+need the help least.
+
+So the sheet ranks by `reportingIndex × seasonality.monthly[thisMonth]` — how
+likely you are to be photographing that bird *right now* — and shows the top 8,
+with the remainder behind a single **More from your deck** row. In June that puts
+American Robin, Song Sparrow, Mourning Dove and Northern Cardinal in the first
+four rows, which is where the answer usually is. The promise is "the answer is
+near the top", not "the list is short", and only the ranked version keeps it.
 
 **Other entry points**
 
