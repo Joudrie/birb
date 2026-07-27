@@ -12,6 +12,10 @@ pipeline/name_overrides.json  North American common names GBIF gets wrong
 decks/backyard-24.json        the curated Massachusetts starter set
 data/us-ma.json               420 Massachusetts birds (generated)
 data/deck-us-ma-backyard-24.json   the built deck (generated)
+
+design/app-ui.md              v1 UI architecture, screen by screen
+prototype/build.py            template + data -> one self-contained page
+prototype/index.html          clickable prototype (generated)
 ```
 
 Rebuild everything:
@@ -23,6 +27,17 @@ python3 build_deck.py --region us-ma --deck backyard-24
 ```
 
 Takes about 80 seconds. No API key, no dependencies beyond the standard library.
+
+Then, to see it as an app:
+
+```bash
+cd prototype
+python3 build.py && open index.html
+```
+
+That's a clickable prototype, not app code — the deck, a bird profile, the codex
+and the three-tap quick-log, running on the real numbers. Scrub the month control
+to watch cards move in and out of season. See `prototype/README.md`.
 
 ---
 
