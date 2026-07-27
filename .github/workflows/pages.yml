@@ -1,0 +1,58 @@
+name: Deploy prototype to Pages
+
+# Publishes prototype/index.html and nothing else. The dataset, the pipeline and
+# the decks stay in the repo -- a Pages site is world-readable on every plan
+# below Enterprise, so only the demo page is uploaded.
+
+on:
+  push:
+    branches:
+      - main
+      - claude/new-session-5peh12
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rebuild the prototype from the committed dataset
+        run: python3 prototype/build.py
+
+      - name: Fail if the committed prototype has drifted from the data
+        run: |
+          if ! git diff --quiet prototype/index.html; then
+            echo "prototype/index.html does not match the data it claims to be built from."
+            echo "Run 'cd prototype && python3 build.py' and commit the result."
+            git diff --stat prototype/index.html
+            exit 1
+          fi
+
+      - name: Stage the single page to publish
+        run: |
+          mkdir -p _site
+          cp prototype/index.html _site/index.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
