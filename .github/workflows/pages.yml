@@ -42,6 +42,7 @@ jobs:
         run: |
           mkdir -p _site
           cp prototype/index.html _site/index.html
+          cp prototype/icon.svg prototype/apple-touch-icon.png _site/
 
       - uses: actions/upload-pages-artifact@v3
         with:

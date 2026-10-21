@@ -51,6 +51,8 @@ def wrap(fragment):
         '<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
         '<meta name="color-scheme" content="light dark">\n'
+        '<link rel="icon" href="icon.svg" type="image/svg+xml">\n'
+        '<link rel="apple-touch-icon" href="apple-touch-icon.png">\n'
         '<meta name="description" content="Clickable prototype of a birdwatching '
         'scrapbook: a closed, regional, seasonal set of 24 Massachusetts birds.">\n'
         f"{head}\n"
